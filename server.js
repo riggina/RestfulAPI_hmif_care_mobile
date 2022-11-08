@@ -3,9 +3,9 @@ const express = require("express");
 var app = express();
 
 app.get("/", function(req,res){
-    response.send("hello");
+    res.send("hello");
 })
 
 app.listen(5000, function(){
-    console.log("Started application on port %d",50400);
+    console.log("Started application on port %d",5000);
 });
