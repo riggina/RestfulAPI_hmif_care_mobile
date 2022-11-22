@@ -17,6 +17,12 @@ const userSchema = new schema(
             type: String,
             required: true
         },
+        foto_profil: String,
+        telepon: String,
+        email: {
+            type: String,
+            unique: true,
+        },
     },
     {
         timestamps: true, versionKey: false
