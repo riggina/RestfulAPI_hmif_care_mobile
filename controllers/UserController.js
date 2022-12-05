@@ -45,64 +45,21 @@ class UserController {
             const token = getSignedToken(user);
             res.status(200).json({
                 token,
+                message: "Login Success"
             })
         } catch (error) {
             res.status(500).send({ err: error});
         }
     }
 
-    static async profileUser(req, res) {
+    static async loginUserInfo (req, res) {
         try {
-            const id = req.user_id;
-
-            const user = await User.findOne({_id: id});
-            res.status(200).json({
-                username: user.username,
-                nim: user.nim,
-                foto_profil: user.foto_profil,
-                telepon: user.telepon,
-                email: user.email
-            })
+            const nim = req.params.nim;
+            const user = await User.findOne({nim: nim})
+            res.status(200).send(user)
         } catch (error) {
-            res.status(500).json({
-                message: 'Gagal memuat profil',
-                error: error
-            })
+            res.status(500).send({ err: error})
         }
-    }
-
-    static async updateProfile(req, res) {
-            const id = req.user_id;
-            User.findOne({_id: id}, function(err, user) {
-                if (err) {
-                    return res.status(500).json({
-                        message: 'Tidak dapat memuat user',
-                        error: err
-                    });
-                }
-
-                if (!user) {
-                    return res.status(404).json({
-                        message: 'User Tidak ditemukan'
-                    })
-                }
-
-                user.username = req.body.username ? req.body.username : user.username;
-                user.nim = req.body.nim ? req.body.nim : user.nim;
-                user.telepon = req.body.telepon ? req.body.telepon : user.telepon;
-                user.email = req.body.email ? req.body.email : user.email;
-
-                user.save(function (err, user){
-                    if (err) {
-                        return res.status(500).json({
-                            mesage: 'Gagal merubah profil',
-                            error: err
-                        });
-                    }
-
-                    return res.status(200).json(user);
-                });
-            });
     }
 }
 
