@@ -19,6 +19,10 @@ const userSchema = new schema(
         },
         telepon: String,
         email: String,
+        konseling: {
+            type: schema.Types.ObjectId,
+            ref: "Konseling"
+        }
     },
     {
         timestamps: true, versionKey: false
