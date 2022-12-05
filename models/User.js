@@ -17,6 +17,8 @@ const userSchema = new schema(
             type: String,
             required: true
         },
+        telepon: String,
+        email: String,
     },
     {
         timestamps: true, versionKey: false

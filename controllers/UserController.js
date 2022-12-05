@@ -40,14 +40,25 @@ class UserController {
             const isValid = await bcrypt.compare(password, user.password);
             if(!isValid)
                 return res.status(403).json({
-                    error: { message: user.password },
+                    error: { message: "Invalid Password!" },
                 })
             const token = getSignedToken(user);
             res.status(200).json({
                 token,
+                message: "Login Success"
             })
         } catch (error) {
             res.status(500).send({ err: error});
+        }
+    }
+
+    static async loginUserInfo (req, res) {
+        try {
+            const nim = req.params.nim;
+            const user = await User.findOne({nim: nim})
+            res.status(200).send(user)
+        } catch (error) {
+            res.status(500).send({ err: error})
         }
     }
 }
