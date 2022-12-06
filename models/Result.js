@@ -10,7 +10,6 @@ const resultSchema = new mongoose.Schema(
             type: Schema.Types.ObjectId,
             ref: "Quiz"},
         total_nilai: String,
-
     },
     {
         timestamps: true, versionKey: false

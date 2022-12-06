@@ -7,6 +7,10 @@ const quizionareSchema = new mongoose.Schema(
         question: [{
             type: Schema.Types.ObjectId,
             ref: "Question"
+        }],
+        result: [{
+            type : Schema.Types.ObjectId,
+            ref: "Result"
         }]
     },
     {
