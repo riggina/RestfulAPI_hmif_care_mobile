@@ -14,6 +14,7 @@ router.get("/ping", (req,res) => {
 router.use("/user", UserRoutes);
 router.use("/quiz", QuizRoutes);
 router.use("/question", QuestionRoutes);
-router.use("/koseling", KonselingRoutes);
+router.use("/konseling", KonselingRoutes);
+
 
 module.exports = router
