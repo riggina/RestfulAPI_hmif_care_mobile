@@ -16,7 +16,12 @@ class UserController {
                     mesage: "Nim sudah digunakan!"
                 },
             });
-        const newUser = new User({ username, nim, password, telepon, email});
+        const newUser = new User({ 
+            username: username, 
+            nim: nim, 
+            password: password, 
+            telepon: null, 
+            email: null});
         try {
             await newUser.save();
             const token = getSignedToken(newUser);

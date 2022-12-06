@@ -1,4 +1,5 @@
 const express = require("express");
+const auth = require("../middleware/auth");
 
 const UserRoutes = require("./User");
 const QuizRoutes = require("./Quiz");
@@ -13,10 +14,10 @@ router.get("/ping", (req,res) => {
 
 
 router.use("/user", UserRoutes);
-router.use("/quiz", QuizRoutes);
-router.use("/question", QuestionRoutes);
-router.use("/konseling", KonselingRoutes);
-router.use("/review", ReviewRoutes);
+router.use("/quiz",auth, QuizRoutes);
+router.use("/question",auth, QuestionRoutes);
+router.use("/konseling",auth, KonselingRoutes);
+router.use("/review",auth, ReviewRoutes);
  
 
-module.exports = router
+module.exports = router;
