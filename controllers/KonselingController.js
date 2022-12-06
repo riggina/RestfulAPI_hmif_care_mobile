@@ -1,5 +1,6 @@
 const { model } = require('mongoose');
-const KonselingModel = require('../models/Konseling')
+const KonselingModel = require('../models/Konseling');
+const Review = require('../models/Review');
 
 class KonselingController {
     static async getAllKonseling(req, res){
@@ -20,7 +21,9 @@ class KonselingController {
                 media_konseling: media_konseling,
                 jadwal_konseling: jadwal_konseling,
                 sesi_konseling: sesi_konseling,
-                keinginan: keinginan
+                keinginan: keinginan,
+                isReview: false,
+                id_review: null
             })
             try {
                 await newKonseling.save(async(err, newKonseling) => {
@@ -33,8 +36,22 @@ class KonselingController {
                 res.status(500).send({err: error});
                 console.log(error)
             }
-        
     }
+
+    static async getKonselingByUserID(req, res){
+        const {id_user} = req.params;
+        try {
+            const KonselingList = await KonselingModel.find({id_user: id_user} && {isReview: false})
+            if(KonselingList) {
+                res.status(200).send(KonselingList)
+            } else {
+                res.status(200).send({message: "Tidak ada konseling yang perlu di review"})
+            }
+        } catch (error) {
+            res.status(500).send({err: error})
+            console.log(error);
+        }
+    }
 }
 
 module.exports = KonselingController;

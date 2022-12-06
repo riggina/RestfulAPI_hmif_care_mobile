@@ -7,6 +7,10 @@ const ReviewSchema = new mongoose.Schema(
             type: Schema.Types.ObjectId,
             ref: "User"
         },
+        id_konseling: {
+            type: Schema.Types.ObjectId,
+            ref: "Konseling"
+        },
         rate: String,
         desc: String,
     },
