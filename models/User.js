@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
+const Schema = mongoose;
 const bcrypt =  require('bcryptjs');
 
 const userSchema = new schema(
@@ -19,6 +20,14 @@ const userSchema = new schema(
         },
         telepon: String,
         email: String,
+        konseling_history: [{
+            type: Schema.Types.ObjectId,
+            ref: "Konseling"
+        }],
+        review_history: [{
+            type: Schema.Types.ObjectId,
+            ref: "Review"
+        }]
     },
     {
         timestamps: true, versionKey: false
@@ -40,4 +49,4 @@ userSchema.pre("save", async function (next){
     }
 });
 
-module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("User", userSchema);

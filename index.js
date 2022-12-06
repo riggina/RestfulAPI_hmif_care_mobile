@@ -1,5 +1,6 @@
-const express = require("express")
+const express = require("express");
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 dotenv.config();
 
 
@@ -18,6 +19,8 @@ async function main(){
         const app = express();
         app.use(express.json());
         app.use(routes);
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({extended: true}));
 
         app.use((req, res, next) => {
             const err = new Error("not found");

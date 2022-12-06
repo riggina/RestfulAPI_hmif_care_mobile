@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 class UserController {
     static async createUser(req, res, next){
-        const { username, nim, password } = req.body;
+        const { username, nim, password,telepon, email} = req.body;
         const user = await User.findOne({ nim });
         if (user)
             return res.status(403).json({
@@ -16,7 +16,7 @@ class UserController {
                     mesage: "Nim sudah digunakan!"
                 },
             });
-        const newUser = new User({ username, nim, password});
+        const newUser = new User({ username, nim, password, telepon, email});
         try {
             await newUser.save();
             const token = getSignedToken(newUser);

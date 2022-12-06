@@ -5,7 +5,7 @@ const konselingSchema = new mongoose.Schema(
     {
         id_user: {
             type: Schema.Types.ObjectId,
-            ref: "User"},
+            ref: "Users"},
         jenis_konseling: String,
         deskripsi: String,
         media_konseling: String,
