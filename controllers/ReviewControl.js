@@ -4,7 +4,7 @@ const UserModel = require("../models/User")
 class ReviewController {
     static async getAllReview(req, res){
         try {
-            const ReviewList = await ReviewModel.find()
+            const ReviewList = await ReviewModel.find().populate("id_user")
             res.status(200).send(ReviewList)
         } catch (error) {
             res.status(500).send({err: error})
