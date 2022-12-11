@@ -23,7 +23,6 @@ class KonselingController {
                 sesi_konseling: sesi_konseling,
                 keinginan: keinginan,
                 isReview: false,
-                id_review: null
             })
             try {
                 await newKonseling.save(async(err, newKonseling) => {
@@ -42,10 +41,10 @@ class KonselingController {
         const {id_user} = req.params;
         try {
             const KonselingList = await KonselingModel.find({id_user: id_user} && {isReview: false})
-            if(KonselingList) {
-                res.status(200).send(KonselingList)
+            if(KonselingList.length == 0){
+                res.status(201).json({message: "Tidak ada yang perlu di review"})
             } else {
-                res.status(200).send({message: "Tidak ada konseling yang perlu di review"})
+                res.status(200).json(KonselingList)
             }
         } catch (error) {
             res.status(500).send({err: error})

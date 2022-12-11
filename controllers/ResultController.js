@@ -32,6 +32,7 @@ class ResultController {
         try{
             const saved = await newResult.save();
             res.status(201).send(saved);
+            console.log(saved)
         } catch (error) {
             res.status(500).send({err : error})
             

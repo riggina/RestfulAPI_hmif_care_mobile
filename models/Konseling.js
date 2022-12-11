@@ -13,10 +13,6 @@ const konselingSchema = new mongoose.Schema(
         sesi_konseling: String,
         keinginan: String,
         isReview: Boolean,
-        id_review: {
-            type: Schema.Types.ObjectId,
-            ref: "Review"
-        }
     },
     {
         timestamps: true, versionKey: false

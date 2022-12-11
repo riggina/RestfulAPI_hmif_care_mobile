@@ -25,12 +25,11 @@ class ReviewController {
                 await UserModel.findByIdAndUpdate({_id: id_user},
                     {$addToSet: {review_history: newReview._id}},
                     {new: true});
-                await KonselingMOdels.findByIdAndUpdate({_id: id_konseling},
-                    {$addToSet: {isReview: true}},
-                    {$addToSet: {id_review: newReview._id}},
-                    {new: true});
+                await KonselingMOdels.updateMany({_id: id_konseling},
+                    {$set: {isReview: true}},
+                    {new: false});
             });
-            res.status(201).send(newReview);
+            res.status(201).send({message: "Review berhasil"});
         } catch (error) {
             res.status(500).send({error: error});
             console.log(error)
@@ -40,11 +39,14 @@ class ReviewController {
     static async getReviewByUser(req, res){
         try {
             const id_user = req.params.id_user;
-            const reviewList = await ReviewModel.find({id_user: id_user})
+            const reviewList = await ReviewModel.find({id_user: id_user} && {isReview: false})
             if (reviewList){
-                
+                res.status(200).send(reviewList)
+                console.log("yang jalan ini")
+            } else {
+                console.log("atau ini")
+                res.status(201).send({message: "No Review Needed"})
             }
-            res.status(200).send(reviewList)
         } catch (error) {
             res.status(500).send({err: error})
         }

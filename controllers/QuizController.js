@@ -4,7 +4,7 @@ const QuizModel = require("../models/Quiz")
 class quizController {
     static async getAllQuiz(req, res) {
         try{
-            const quizList = await QuizModel.find()
+            const quizList = await QuizModel.find().populate('question')
             res.status(200).send(quizList)
         } catch (error) {
             res.status(500).send({err: error})
