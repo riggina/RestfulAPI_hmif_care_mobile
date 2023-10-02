@@ -12,6 +12,7 @@ const konselingSchema = new mongoose.Schema(
         jadwal_konseling: String,
         sesi_konseling: String,
         keinginan: String,
+        isReview: Boolean,
     },
     {
         timestamps: true, versionKey: false
